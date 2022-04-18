@@ -30,3 +30,12 @@ ul {
   flex-direction: column;
   row-gap: 20px;
 }
+
+header {
+  margin: 20px;
+  text-align: center;
+
+  & a {
+    color: #63D1BB;
+  }
+}

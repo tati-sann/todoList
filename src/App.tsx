@@ -24,6 +24,10 @@ const App = () => {
 
   return (
     <div className="App">
+      <header>
+        <a href={'https://github.com/tati-sann/todoList'} target={'_blank'}>https://github.com/tati-sann/todoList</a>
+      </header>
+
       <main className={'main-content'}>
         <div className={'main-content__wrapper'}>
           <section>
