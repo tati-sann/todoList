@@ -1,56 +1,48 @@
-import React, {useState, ChangeEvent} from 'react';
-import './App.css';
-import {ITask} from "./interfaces";
-import TodoTask from "./Components/TodoTask";
+import React, {useMemo, useState} from 'react';
+import './styles/App.scss';
+import TodoForm from "./components/TodoForm";
+import {ITask} from "./types/interfaces";
+import TodoTaskList from "./components/TodoTaskList";
+import {todoList} from "./static/todoList";
+import TextInput from "./components/UI/text-input/TextInput";
 
-function App() {
+const App = () => {
+  const [taskList, setTaskList] = useState<ITask[]>(todoList);
+  const [search, setSearch] = useState<string>('');
 
-  const [task, setTask] = useState<string>("");
-  const [deadline, setDeadline] = useState<number>(0);
-  const [todoList, setTodoList] = useState<ITask[]>([]);
+  const searchTask = useMemo(() => {
+    return taskList.filter(task => task.name.includes(search));
+  }, [search, taskList])
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.name === "task") {
-      setTask(event.target.value);
-    } else {
-      setDeadline(Number(event.target.value));
-    }
+  const createTask = (newTask: ITask) => {
+    setTaskList([...taskList, newTask]);
   }
 
-  const addTask = (): void => {
-    const newTask = {taskName: task, deadline: deadline};
-    setTodoList([...todoList, newTask]);
-    setTask("");
-    setDeadline(0);
-  }
-
-  const delTask = (taskNameToDelete: string): void => {
-    setTodoList(todoList.filter((task) => {
-      return task.taskName !== taskNameToDelete;
-    }))
+  const deleteTask = (taskId: Date) => {
+    setTaskList(taskList.filter(task => task.id !== taskId));
   }
 
   return (
     <div className="App">
-      <header className="header">
-        <div className="header__wrapper wrapper">
-          <label className="header__input">
-            <span>Добавить дело в список</span>
-            <input name="task" value={task} type="text" onChange={handleChange}/>
-          </label>
-          <label className="header__input">
-            <span>Кол-во дней до дедлайна</span>
-            <input name="deadline" value={deadline} type="number" min={0} onChange={handleChange}/>
-          </label>
-          <button onClick={addTask}>Добавить</button>
-        </div>
-      </header>
+      <main className={'main-content'}>
+        <div className={'main-content__wrapper'}>
+          <section>
+            <div className={'col-wrapper'}>
+              <h2>Добавить задачу</h2>
+              <TodoForm createTask={createTask}/>
 
-      <main>
-        <div className="wrapper">
-          {todoList.map((task: ITask, key: number) => {
-            return <TodoTask key={key} task={task} delTask={delTask} />;
-          })}
+              <TextInput
+                value={search}
+                placeholder={'Поиск'}
+                onChange={(event) => setSearch(event.target.value)}
+              />
+            </div>
+          </section>
+
+          <section>
+            <h2>Список задач</h2>
+            <TodoTaskList taskList={searchTask} delTask={deleteTask}/>
+          </section>
         </div>
       </main>
     </div>

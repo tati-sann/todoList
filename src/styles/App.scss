@@ -1,0 +1,32 @@
+html {
+  height: 100%;
+  font-family: 'Oswald', sans-serif;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  background-color: #282c34;
+  color: white;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+.main-content {
+  &__wrapper {
+    margin: 20px auto;
+    max-width: 1180px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 50px;
+  }
+}
+
+.col-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}

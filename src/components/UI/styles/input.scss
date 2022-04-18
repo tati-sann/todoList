@@ -1,0 +1,44 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+
+  & input {
+    padding: 20px 30px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #56C3B2;
+    font-size: 16px;
+    font-family: 'Oswald', sans-serif;
+
+    &::placeholder {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.1);
+      font-family: 'Oswald', sans-serif;
+
+    }
+
+    &:hover {
+      border-color: #63D1BB;
+      outline: none;
+    }
+
+    &:focus {
+      border-color: #56C3B2;
+      outline: none;
+    }
+  }
+
+  & input[type=number]::-webkit-inner-spin-button,
+  & input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+
+  & input[type=number] {
+    -moz-appearance: textfield;
+  }
+}

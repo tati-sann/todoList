@@ -1,0 +1,24 @@
+.button {
+  padding: 20px 30px;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: white;
+  font-family: 'Oswald', sans-serif;
+  border: none;
+  border-radius: 10px;
+  background-color: #63D1BB;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: #46C1AE;
+    outline: none;
+  }
+  &:active {
+    background-color: #46C1AE;
+  }
+  &:disabled {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
